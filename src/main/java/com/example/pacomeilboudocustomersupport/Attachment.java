@@ -1,22 +1,38 @@
 package com.example.pacomeilboudocustomersupport;
 
-public class Attachment {
+import java.util.Arrays;
+
+public class Attachment
+{
     private String name;
+
     private byte[] contents;
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
-    public byte[] getContents() {
+    public byte[] getContents()
+    {
         return contents;
     }
 
-    public void setContents(byte[] contents) {
+    public void setContents(byte[] contents)
+    {
         this.contents = contents;
+    }
+
+    @Override
+    public String toString() {
+        return "Attachment{" +
+                "name='" + name + '\'' +
+                ", contents=" + Arrays.toString(contents) +
+                '}';
     }
 }

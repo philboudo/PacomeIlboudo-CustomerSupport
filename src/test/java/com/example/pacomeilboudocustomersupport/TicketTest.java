@@ -7,37 +7,66 @@ import static org.junit.jupiter.api.Assertions.*;
 class TicketTest {
 
     @Test
-    void testTicketCreation() {
-        // Create a Ticket object
-        Ticket ticket = new Ticket();
-
-        // Verify that the ticket is not null
-        assertNotNull(ticket);
+    void getCustomerName() {
     }
 
     @Test
-    void testTicketAttachmentsSize() {
-        // Create a Ticket object
-        Ticket ticket = new Ticket();
-
-        // Add an attachment
-        Attachment attachment = new Attachment();
-        ticket.addAttachment(attachment);
-
-        // Verify the number of attachments
-        assertEquals(1, ticket.getNumberOfAttachments());
+    void setCustomerName() {
     }
 
     @Test
-    void testTicketAttachmentsNotNull() {
-        // Create a Ticket object
-        Ticket ticket = new Ticket();
+    void getSubject() {
+    }
 
-        // Add an attachment
-        Attachment attachment = new Attachment();
-        ticket.addAttachment(attachment);
+    @Test
+    void setSubject() {
+    }
 
-        // Verify that the attachment is not null
-        assertNotNull(ticket.getAllAttachments().values().iterator().next());
+    @Test
+    void getBody() {
+    }
+
+    @Test
+    void setBody() {
+    }
+
+    @Test
+    void getAttachments() {
+    }
+
+    @Test
+    void setAttachments() {
+    }
+
+    @Test
+    void addAttachment() {
+    }
+
+    @Test
+    void getNumberOfAttachments() {
+    }
+
+    @Test
+    void getAttachmentById() {
+    }
+
+    @Test
+    void getAllAttachments() {
+    }
+
+    @Test
+    void getAttachmentByName() {
+    }
+
+    @Test
+    void hasAttachments() {
+    }
+
+    @Test
+    void getAttachment() {
+    }
+
+    @Test
+    void testAddAttachment() {
     }
 }

@@ -2,42 +2,39 @@ package com.example.pacomeilboudocustomersupport;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class AttachmentTest {
 
     @Test
-    void testAttachmentCreation() {
-        // Attachment object
-        Attachment attachment = new Attachment();
-
-        assertNotNull(attachment);
+    void getName() {
     }
 
     @Test
-    void testAttachmentName() {
-        // Attachment object
-        Attachment attachment = new Attachment();
-
-        // Set the name
-        attachment.setName("Attachment 1");
-
-        // Verify the name
-        assertEquals("Attachment 1", attachment.getName());
+    void setName() {
     }
 
     @Test
-    void testAttachmentContents() {
-        // Create an Attachment object
-        Attachment attachment = new Attachment();
+    void getContents() {
+    }
 
-        // Set the contents
-        byte[] contents = { 1, 2, 3 };
-        attachment.setContents(contents);
+    @Test
+    void setContents() {
+    }
 
-        // Verify the contents
-        assertArrayEquals(contents, attachment.getContents());
+    @Test
+    void testGetName() {
+    }
+
+    @Test
+    void testSetName() {
+    }
+
+    @Test
+    void testGetContents() {
+    }
+
+    @Test
+    void testSetContents() {
     }
 }

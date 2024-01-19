@@ -20,10 +20,10 @@ import java.util.Map;
 @MultipartConfig(fileSizeThreshold = 5_242_880, maxFileSize = 20_971_520L, maxRequestSize = 41_943_040L)
 public class TicketServlet extends HttpServlet {
     private volatile int TICKET_ID = 1;
-    private Map<Integer, Ticket> ticketDB = new LinkedHashMap<>();
+    private final Map<Integer, Ticket> ticketDB = new LinkedHashMap<>();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
 
         String action = request.getParameter("action");
@@ -33,18 +33,10 @@ public class TicketServlet extends HttpServlet {
         }
 
         switch (action) {
-            case "createTicket":
-                showTicketForm(request, response);
-                break;
-            case "view":
-                viewTicket(request, response);
-                break;
-            case "download":
-                downloadAttachment(request, response);
-                break;
-            default:
-                listTickets(request, response);
-                break;
+            case "createTicket" -> showTicketForm(response);
+            case "view" -> viewTicket(request, response);
+            case "download" -> downloadAttachment(request, response);
+            default -> listTickets(response);
         }
     }
 
@@ -58,17 +50,14 @@ public class TicketServlet extends HttpServlet {
             action = "list";
         }
 
-        switch (action) {
-            case "create":
-                createTicket(request, response);
-                break;
-            default:
-                response.sendRedirect("tickets");
-                break;
+        if (action.equals("create")) {
+            createTicket(request, response);
+        } else {
+            response.sendRedirect("tickets");
         }
     }
 
-    private void listTickets(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void listTickets(HttpServletResponse response) throws IOException {
         PrintWriter out = response.getWriter();
 
         // Heading and link to create a ticket
@@ -133,7 +122,7 @@ public class TicketServlet extends HttpServlet {
         return attachmentObj;
     }
 
-    private void downloadAttachment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void downloadAttachment(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String idString = request.getParameter("ticketId");
         String attachmentName = request.getParameter("attachmentName");
 
@@ -152,7 +141,7 @@ public class TicketServlet extends HttpServlet {
         }
     }
 
-    private void viewTicket(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void viewTicket(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String idString = request.getParameter("ticketId");
 
         Ticket ticket = getTicket(idString, response);
@@ -181,7 +170,7 @@ public class TicketServlet extends HttpServlet {
         out.println("</body></html>");
     }
 
-    private void showTicketForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void showTicketForm(HttpServletResponse response) throws IOException {
         PrintWriter out = response.getWriter();
 
         out.println("<html><body><h2>Create a Customer Support Ticket</h2>");
@@ -199,7 +188,7 @@ public class TicketServlet extends HttpServlet {
         out.println("</form></body></html>");
     }
 
-    private Ticket getTicket(String idString, HttpServletResponse response) throws ServletException, IOException {
+    private Ticket getTicket(String idString, HttpServletResponse response) throws IOException {
         if (idString == null || idString.length() == 0) {
             response.sendRedirect("tickets");
             return null;

@@ -12,8 +12,11 @@
     <title>Create Ticket</title>
 </head>
 <body>
+<a href="<c:url value='/logout' />">Logout</a>
+
+
 <h2>Create a New Ticket</h2>
-<form method="POST" action="tickets" enctype="multipart/form-data">
+<form method="POST" action="ticket" enctype="multipart/form-data">
     <input type="hidden" name="action" value="create">
     <label for="customerName">Customer Name:</label>
     <input type="text" id="customerName" name="customerName" required><br><br>
@@ -25,6 +28,6 @@
     <input type="file" id="attachment" name="attachment"><br><br>
     <input type="submit" value="Submit">
 </form>
-<a href="tickets">Return to Ticket List</a>
+<a href="ticket">Return to Ticket List</a>
 </body>
 </html>

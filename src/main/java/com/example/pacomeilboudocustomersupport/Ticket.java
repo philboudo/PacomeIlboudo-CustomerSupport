@@ -9,7 +9,6 @@ public class Ticket {
     private final String body;
     private final Map<Integer, Attachment> attachments;
 
-    // Parameterized constructor
     public Ticket(String customerName, String subject, String body) {
         this.customerName = customerName;
         this.subject = subject;
@@ -17,12 +16,10 @@ public class Ticket {
         this.attachments = new HashMap<>();
     }
 
-    // Default constructor
     public Ticket() {
-        this("", "", ""); // Call the parameterized constructor with default values
+        this("", "", "");
     }
 
-    // Getter and Setter methods for customerName, subject, and body
     public String getCustomerName() {
         return customerName;
     }
@@ -48,13 +45,17 @@ public class Ticket {
         }
         return null;
     }
-    
+
     public boolean hasAttachments() {
         return !attachments.isEmpty();
     }
 
     public Attachment[] getAttachments() {
         return attachments.values().toArray(new Attachment[0]);
+    }
+
+    public int getNumberOfAttachments() {
+        return attachments.size();
     }
 
     @Override

@@ -3,4 +3,63 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0">
+
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.example.pacomeilboudocustomersupport.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CustomLoginServlet</servlet-name>
+        <servlet-class>com.example.pacomeilboudocustomersupport.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CustomLoginServlet</servlet-name>
+        <url-pattern>/customLogin</url-pattern>
+    </servlet-mapping>
+
+    <security-role>
+        <role-name>employee</role-name>
+    </security-role>
+    <security-role>
+        <role-name>admin</role-name>
+    </security-role>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Sessions Page</web-resource-name>
+            <url-pattern>/sessions.jsp</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>employee</role-name>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <listener>
+        <listener-class>com.example.pacomeilboudocustomersupport.SessionListener</listener-class>
+    </listener>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/jsp/view/error.jsp</location>
+    </error-page>
+
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>EmployeeRealm</realm-name>
+    </login-config>
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <url-pattern>*.jspf</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+            <scripting-invalid>false</scripting-invalid>
+            <include-prelude>/WEB-INF/jsp/view/base.jsp</include-prelude>
+            <trim-directive-whitespaces>true</trim-directive-whitespaces>
+            <default-content-type>text/html</default-content-type>
+        </jsp-property-group>
+    </jsp-config>
 </web-app>

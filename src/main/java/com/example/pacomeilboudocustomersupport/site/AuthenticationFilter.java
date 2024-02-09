@@ -13,7 +13,6 @@ public class AuthenticationFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
     }
-
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpSession session = ((HttpServletRequest)servletRequest).getSession(false); // don't create a session if doesn't exit

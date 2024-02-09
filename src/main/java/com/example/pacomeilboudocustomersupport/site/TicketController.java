@@ -1,7 +1,5 @@
 package com.example.pacomeilboudocustomersupport.site;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,13 +32,14 @@ public class TicketController {
 
     @GetMapping("create")
     public ModelAndView createTicket() {
-        return new ModelAndView("ticketForm", "listTicket", new TicketForm());
+        return new ModelAndView("ticketForm", "ticket", new TicketForm());
     }
 
     @PostMapping("create")
     public View createPost(@ModelAttribute("ticket") TicketForm form) throws IOException {
         Ticket ticket = new Ticket();
         ticket.setSubject(form.getSubject());
+        ticket.setCustomerName(form.getCustomerName());
         ticket.setBody(form.getBody());
 
         MultipartFile file = form.getAttachment();
@@ -48,6 +47,7 @@ public class TicketController {
             Attachment attachment = new Attachment();
             attachment.setName(file.getOriginalFilename());
             attachment.setContents(file.getBytes());
+            //ticket.addAttachment(attachment);
             ticket.setAttachment(attachment);
         }
 
@@ -88,17 +88,7 @@ public class TicketController {
         Attachment attachment = ticket.getAttachment();
 
         // otherwise we have an attachment, let's download
-        return new DownloadView(attachment.getName(), attachment.getContents()) {
-            @Override
-            public void render(Map<String, ?> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-                response.setContentType("application/octet-stream");
-                response.setHeader("Content-Disposition", "attachment; filename=\"" + attachment.getName() + "\"");
-
-                // Write attachment contents to response output stream
-                response.getOutputStream().write(attachment.getContents());
-            }
-        };
+        return new DownloadView(attachment.getName(), attachment.getContents());
     }
 
     public static class TicketForm {

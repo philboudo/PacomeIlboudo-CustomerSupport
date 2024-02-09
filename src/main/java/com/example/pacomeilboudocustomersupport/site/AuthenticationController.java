@@ -34,7 +34,7 @@ public class AuthenticationController {
     @GetMapping("login")
     public ModelAndView loginForm(Model model, HttpSession session) {
         if (session.getAttribute("username") != null) {
-            return new ModelAndView(new RedirectView("/ticket/", true, false));
+            return new ModelAndView(new RedirectView("/ticket", true, false));
         }
         model.addAttribute("loginFailed", false);
         return new ModelAndView("login", "loginForm", new LoginForm());
@@ -47,7 +47,7 @@ public class AuthenticationController {
                                    HttpServletRequest request) {
         // already logged in
         if (session.getAttribute("username") != null) {
-            return new ModelAndView(new RedirectView("/ticket/", true, false));
+            return new ModelAndView(new RedirectView("/ticket", true, false));
         }
 
         String username = form.getUsername();
@@ -64,7 +64,7 @@ public class AuthenticationController {
         session.invalidate();
         HttpSession newSession = request.getSession(true); // create a new session
         newSession.setAttribute("username", username);
-        return new ModelAndView(new RedirectView("/ticket/", true, false));
+        return new ModelAndView(new RedirectView("/ticket", true, false));
     }
 
 

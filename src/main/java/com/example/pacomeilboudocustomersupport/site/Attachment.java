@@ -1,8 +1,9 @@
-package com.example.pacomeilboudocustomersupport;
+package com.example.pacomeilboudocustomersupport.site;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class Attachment
+public class Attachment implements Serializable
 {
     private String name;
 

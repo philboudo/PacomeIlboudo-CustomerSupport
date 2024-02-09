@@ -5,7 +5,6 @@
 </head>
 <body>
 <a href="<c:url value='/logout' />">Logout</a>
-
 <h2>Customer Support Ticket</h2>
 <h3>Ticket #<c:out value="${ticketId}"/>: <c:out value="${ticket.subject}"/></h3>
 <i>Customer Name: <c:out value="${ticket.customerName}"/></i><br>
@@ -21,6 +20,6 @@
             </c:url>"><c:out value="${attachment.name}"/></a>
     </c:forEach><br>
 </c:if>
-<br><a href="<c:url value='/ticket' />">Return to ticket list</a>
+<br><a href="<c:url value='/ticket/list' />">Return to ticket list</a>
 </body>
 </html>

@@ -1,13 +1,15 @@
-package com.example.pacomeilboudocustomersupport;
+package com.example.pacomeilboudocustomersupport.site;
+
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Ticket {
-    private final String customerName;
-    private final String subject;
-    private final String body;
-    private final Map<Integer, Attachment> attachments;
+    private String customerName;
+    private String subject;
+    private String body;
+    private Map<Integer, Attachment> attachments;
+    private Attachment attachment;
 
     public Ticket(String customerName, String subject, String body) {
         this.customerName = customerName;
@@ -24,12 +26,24 @@ public class Ticket {
         return customerName;
     }
 
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
     public String getSubject() {
         return subject;
     }
 
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
     public String getBody() {
         return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
     }
 
     public void addAttachment(Attachment attachment) {
@@ -58,6 +72,7 @@ public class Ticket {
         return attachments.size();
     }
 
+
     @Override
     public String toString() {
         return "Ticket{" +
@@ -67,4 +82,13 @@ public class Ticket {
                 ", attachments=" + attachments +
                 '}';
     }
+
+    public void setAttachment(Attachment attachment) {
+        this.attachment = attachment;
+    }
+
+    public Attachment getAttachment() {
+        return this.attachment;
+    }
+
 }

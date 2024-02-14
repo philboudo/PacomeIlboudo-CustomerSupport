@@ -1,7 +1,10 @@
 package com.example.pacomeilboudocustomersupport.site;
 
 
+import com.example.pacomeilboudocustomersupport.entities.Attachment;
+
 public class Ticket {
+    private long id;
     private String customerName;
     private String subject;
     private String body;
@@ -39,6 +42,14 @@ public class Ticket {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
 

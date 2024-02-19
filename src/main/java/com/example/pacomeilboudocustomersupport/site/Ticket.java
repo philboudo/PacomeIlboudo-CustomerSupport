@@ -9,6 +9,8 @@ public class Ticket {
     private String subject;
     private String body;
     private Attachment attachment;
+//    private LocalDateTime dateCreated;
+    private int numberOfAttachments;
 
     public Ticket(String customerName, String subject, String body) {
         this.customerName = customerName;
@@ -52,6 +54,19 @@ public class Ticket {
         this.id = id;
     }
 
+//    public LocalDateTime getDateCreated() {
+//        return dateCreated;
+//    }
+
+//    public void setDateCreated(LocalDateTime dateCreated) {
+//        this.dateCreated = dateCreated;
+//    }
+
+    public int getNumberOfAttachments() {
+        return numberOfAttachments;
+    }
+
+
 
     public boolean hasAttachments() {
 
@@ -79,4 +94,6 @@ public class Ticket {
         return this.attachment;
     }
 
+    public void setNumberOfAttachments(int numberOfAttachments) {
+    }
 }

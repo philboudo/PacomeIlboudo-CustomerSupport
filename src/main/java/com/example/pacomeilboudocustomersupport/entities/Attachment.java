@@ -2,6 +2,7 @@ package com.example.pacomeilboudocustomersupport.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Arrays;
 
@@ -10,6 +11,7 @@ import java.util.Arrays;
 public class Attachment implements Serializable
 {
 
+    @Serial
     private static  final long serialVersionUID = 1L;
 
     private long id;

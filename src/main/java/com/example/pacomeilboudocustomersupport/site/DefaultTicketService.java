@@ -1,8 +1,7 @@
 package com.example.pacomeilboudocustomersupport.site;
 
-import com.example.pacomeilboudocustomersupport.entities.Attachment;
-import com.example.pacomeilboudocustomersupport.entities.AttachmentEntity;
 import com.example.pacomeilboudocustomersupport.entities.TicketEntity;
+import jakarta.inject.Inject;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,11 +12,8 @@ import java.util.List;
 @Service
 public class DefaultTicketService implements TicketService {
 
-    private final TicketRepository ticketRepository;
-
-    public DefaultTicketService(TicketRepository ticketRepository, AttachmentRepository attachmentRepository) {
-        this.ticketRepository = ticketRepository;
-    }
+    @Inject TicketRepository ticketRepository;
+    @Inject AttachmentRepository attachmentRepository;
 
     @Override
     @Transactional
@@ -34,45 +30,29 @@ public class DefaultTicketService implements TicketService {
         return ticketEntity == null ? null : convert(ticketEntity);
     }
 
-    private Ticket convert(TicketEntity ticketEntity) {
+    private Ticket convert(TicketEntity entity) {
         Ticket ticket = new Ticket();
-        ticket.setCustomerName(ticketEntity.getCustomerName());
-        ticket.setSubject(ticketEntity.getSubject());
-        ticket.setBody(ticketEntity.getBody());
-        ticket.setAttachment(convertAttachment(AttachmentEntity.getAttachment())); // Convert attachment
-        return ticket;
-    }
+        ticket.setId(entity.getId());
+        ticket.setSubject(entity.getSubject());
+        ticket.setCustomerName(entity.getCustomerName());
+        ticket.setBody(entity.getBody());
+        ticket.setNumberOfAttachments(entity.getNumberOfAttachments());
 
-    private Attachment convertAttachment(AttachmentEntity attachmentEntity) {
-        if (attachmentEntity == null) {
-            return null;
-        }
-        Attachment attachment = new Attachment();
-        attachment.setName(attachmentEntity.getName());
-        attachment.setContents(attachmentEntity.getContents());
-        return attachment;
+        return ticket;
     }
 
     @Override
     @Transactional
     public void save(Ticket ticket) {
         TicketEntity ticketEntity = new TicketEntity();
-        ticketEntity.setCustomerName(ticket.getCustomerName());
+        ticketEntity.setId(ticket.getId());
         ticketEntity.setSubject(ticket.getSubject());
+        ticketEntity.setCustomerName(ticket.getCustomerName());
         ticketEntity.setBody(ticket.getBody());
-
-        Attachment attachment = ticket.getAttachment();
-        if (attachment != null) {
-            AttachmentEntity attachmentEntity = new AttachmentEntity();
-            attachmentEntity.setName(attachment.getName());
-            attachmentEntity.setContents(attachment.getContents());
-            ticketEntity.setAttachment(attachmentEntity);
-        }
-
-        if (ticket.getId() < 1) { // New ticket, insert
+        ticketEntity.setNumberOfAttachments(ticket.getNumberOfAttachments());
+        if (ticket.getId() < 1) {
             ticketRepository.add(ticketEntity);
-        } else { // Existing ticket, update
-            ticketEntity.setId(ticket.getId());
+        } else {
             ticketRepository.update(ticketEntity);
         }
     }

@@ -18,9 +18,6 @@ public class TicketEntity implements Serializable {
     private String body;
     private int numberOfAttachments;
 
-    @ManyToOne
-    @Column(name = "attachment")
-    private AttachmentEntity attachment;
 
     @Id
     @Column(name="id")
@@ -78,13 +75,6 @@ public class TicketEntity implements Serializable {
         this.numberOfAttachments = numberOfAttachments;
     }
 
-    public AttachmentEntity getAttachment() {
-        return attachment;
-    }
-
-    public void setAttachment(AttachmentEntity attachment) {
-        this.attachment = attachment;
-    }
 }
 
 

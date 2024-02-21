@@ -14,6 +14,7 @@ public class Attachment implements Serializable
     @Serial
     private static  final long serialVersionUID = 1L;
 
+
     private long id;
 
     public void setTicket_id(long ticket_id) {
@@ -38,9 +39,13 @@ public class Attachment implements Serializable
     }
 
     @Basic
+    @Column(name="ticket_id")
     public long getTicket_id() {
         return ticket_id;
     }
+
+    @Column(name="name")
+
     @Basic
     public String getName()
     {
@@ -52,6 +57,7 @@ public class Attachment implements Serializable
         this.name = name;
     }
     @Lob
+    @Column(name="contents")
     public byte[] getContents()
     {
         return contents;

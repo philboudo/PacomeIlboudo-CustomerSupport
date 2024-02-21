@@ -36,7 +36,9 @@ public class DefaultTicketService implements TicketService {
         ticket.setSubject(entity.getSubject());
         ticket.setCustomerName(entity.getCustomerName());
         ticket.setBody(entity.getBody());
-        ticket.setNumberOfAttachments(entity.getNumberOfAttachments());
+        ticket.setAttachment(attachmentRepository.getByTicket_id(entity.getId()));
+
+        //ticket.setNumberOfAttachments(entity.getNumberOfAttachments());
 
         return ticket;
     }
@@ -52,6 +54,12 @@ public class DefaultTicketService implements TicketService {
         ticketEntity.setNumberOfAttachments(ticket.getNumberOfAttachments());
         if (ticket.getId() < 1) {
             ticketRepository.add(ticketEntity);
+            ticket.setId(ticketEntity.getId());
+
+            if (ticket.hasAttachments()) {
+                ticket.getAttachment().setTicket_id(ticketEntity.getId());
+                attachmentRepository.add(ticket.getAttachment());
+            }
         } else {
             ticketRepository.update(ticketEntity);
         }
